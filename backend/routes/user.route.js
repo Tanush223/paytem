@@ -76,8 +76,7 @@ router.post("/signin", async (req, res) => {
         res.json({
             token: token
         })
-        return;
-    }
+        return;    }
 
     
     res.status(411).json({
