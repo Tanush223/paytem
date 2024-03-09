@@ -1,9 +1,10 @@
-const express = require('express')
-const UserRouter = require('./user.route')
-const AcountRouter = require('./accounts.route')
-const router = express.Router()
+const express = require('express');
+const userRouter = require('./user.route'); // Change to camelCase for consistency
+const accountRouter = require('./accounts.route'); // Change to camelCase for consistency
 
-router.use('/user',UserRouter)
-router.use('/account',AcountRouter)
+const router = express.Router();
 
-module.exports=router
+router.use('/user', userRouter);
+router.use('/account', accountRouter);
+
+module.exports = router;
