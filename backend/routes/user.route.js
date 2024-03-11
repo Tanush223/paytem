@@ -5,12 +5,13 @@ const { User } = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const jwt_Secret = 'secret';
 const  { authMiddleware } = require("./middleware");
-const Account = require('../models/account.model')
+const { Account } = require('../models/account.model');
+
 
 const signupBody = zod.object({
     username: zod.string(),
-    firstName: zod.string(),
-    lastName: zod.string(), 
+    firstname: zod.string(),
+    lastname: zod.string(), 
     password: zod.string()
 });
 
@@ -20,8 +21,8 @@ const signinBody = zod.object({
 })
 
 const updateBody = zod.object({
-    firstName:zod.string(),
-    lastName:zod.string(),
+    firstname:zod.string(),
+    lastname:zod.string(),
     password:zod.string(),
 })
 
@@ -40,15 +41,15 @@ router.post('/signup', async (req, res) => {
 
     if (existingUser) {
         return res.status(411).json({
-            message: 'Email already taken/Incorrect inputs'
+            message: 'Incorrect inputs'
         });
     }
 
     const user = await User.create({
         username: req.body.username,
         password: req.body.password,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName 
+        firstname: req.body.firstname,
+        lastname: req.body.lastname 
     });
 
     const userId = user._id;
@@ -121,7 +122,7 @@ router.put("/",authMiddleware,async (req, res) => {
 });
 
 
-router.get("/bulk", async (req, res) => {
+router.get("/bulk",authMiddleware, async (req, res) => {
     const filter = req.query.filter || "";
 
     const users = await User.find({

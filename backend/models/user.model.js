@@ -17,13 +17,13 @@ const userSchema = new mongoose.Schema({
         type:String,
         require:true,
         trim:true,
-        maxLength:10
+        maxLength:30
     },
     lastName:{
         type:String,
         require:true,
         trim:true,
-        maxLength:10
+        maxLength:30
     },
 });
 
